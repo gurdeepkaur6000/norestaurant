@@ -57,6 +57,11 @@
    
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                @if ($cartItems)
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ url('cart') }}">Order Items</a>
+                </li>
+                @endif
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>

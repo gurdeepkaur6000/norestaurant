@@ -8,7 +8,7 @@
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ __('Posts') }}</h3><a href="{{ url('add-post') }}" class="btn btn-primary float-right">Add Post</a>
+                    <h3>{{ __('Orders') }}</h3>
                 </div>
   
                 <div class="card-body">
@@ -22,19 +22,17 @@
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
-                      @foreach($postData as $postDataResult)
+                      @foreach($allorders as $allordersR)
                       <tr>
-                        <td>{{ $postDataResult->category_id }}</td>
-                        <td>{{ $postDataResult->title }}</td>
-                        <td>{{ $postDataResult->description }}</td>
-                        <td>{{ $postDataResult->price }}</td>
+                        <td>{{ $allordersR->category_id }}</td>
+                        <td>{{ $allordersR->title }}</td>
+                        <td>{{ $allordersR->description }}</td>
+                        <td>{{ $allordersR->price }}</td>
                         <td>
-                          <a href="{{ url('edit-post') }}/{{ $postDataResult->id }}" class="btn btn-success float-end">
-                            <i class="fa fa-pencil"></i>
+                          <a href="{{ url('edit-post') }}/{{ $allordersR->id }}" class="btn btn-success float-end">
+                            <i class="fa fa-invoice"></i>
                           </a>
-                          <a href="{{ url('delete-post') }}/{{ $postDataResult->id }}" class="btn btn-danger float-end" onclick="return confirm('Are you sure to delete this?');">
-                            <i class="fa fa-trash"></i>
-                          </a>
+                          
                         </td>
                       </tr>
                       @endforeach

@@ -68,5 +68,14 @@ class PostController extends Controller
         return redirect()->back()->with('status','Post Updated Successfully');
     }
 
+    public function deletePostData($id)
+    {
+        
+        Posts::deletePostData($id);
+
+        return redirect('/posts');
+        
+    } 
+
     
 }
