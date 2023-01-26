@@ -84,14 +84,16 @@ class TableOrderController extends Controller
         return redirect()->route('cart.list');
     }
 
-    public function orderCart()
+    public function orderCart(Request $request)
     {
+        $tablenumber = $request->tablenumber;
 
     	$orderfull = new Order;
  
 		$orderfull->total_price = 1;
 		$orderfull->final_price = 1;
- 		$orderfull->gst = 1;
+        $orderfull->tablenumber_id = $tablenumber;
+        $orderfull->gst = 1;
  
 		$orderfull->save();
 

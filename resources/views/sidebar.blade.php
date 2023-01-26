@@ -55,7 +55,7 @@ div.content {
   <a class="active" href="{{ url('dashboard') }}">Home</a>
   <a  class="active" href="{{ url('categories') }}">Categories</a>
   <a  class="active" href="{{ url('posts') }}">Posts</a>
-  <a  class="active" href="{{ url('view-orders') }}">View Order</a>
+  <!--<a  class="active" href="{{ url('view-orders') }}">View Order</a>-->
   
 </div>
     

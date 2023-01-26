@@ -6,6 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
                 <h1> </h1>
+                
 				@foreach ($categoryData as $categoryDataR)
 				<div class="col-sm-12 uppercase">
 					<h3>{{$categoryDataR->title}}</h3>

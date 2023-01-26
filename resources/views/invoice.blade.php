@@ -89,6 +89,10 @@
 		<div class="clear-fix"></div>
 			<table border='1' cellspacing='0'>
 				<tr>
+					<td colspan='4' class='text-left'>Table Number - {{$orderDetail->tablenumber_id}}</td>
+					
+				</tr>
+				<tr>
 					<th width=250>Item</th>
 					<th width=80>Quantity</th>
 					<th width=100>Unit price</th>
