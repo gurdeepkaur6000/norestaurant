@@ -57,7 +57,7 @@
    
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                @if ($cartItems)
+                @if (count($cartItems)>0)
                 <li class="nav-item">
                         <a class="nav-link" href="{{ url('cart') }}">Order Items</a>
                 </li>

@@ -23,10 +23,6 @@ class Posts extends Model
     	return $value;
     }
 
-    public function postHasOneCategory(){
-        return $this->hasOne(Category::class);
-    }
-
     public static function deletePostData($id)
     {
         DB::delete("delete from posts where id ='$id'");

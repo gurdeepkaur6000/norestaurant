@@ -15,9 +15,7 @@ use App\Http\Controllers\TableOrderController;
 |
 */
 
-//Route::get('/', function () {
- //   return view('home');
-//});
+Route::get('invoice/{id}', 'App\Http\Controllers\TableOrderController@showInvoiceData');
 
 Route::get('/', 'App\Http\Controllers\TableOrderController@showTableOrderData');
 

@@ -24,8 +24,16 @@ class TableOrderController extends Controller
 	public function cartList()
     {
         $cartItems = \Cart::getContent();
-        // dd($cartItems);
-        return view('cart', compact('cartItems'));
+        if(count($cartItems)>0)
+        {
+        	return view('cart', compact('cartItems'));
+        }
+        else
+        {
+        	//(new TableOrderController)->showTableOrderData();
+        	//$this->showTableOrderData();
+        }
+        
     }
 
 
@@ -78,38 +86,50 @@ class TableOrderController extends Controller
 
     public function orderCart()
     {
+
+    	$orderfull = new Order;
+ 
+		$orderfull->total_price = 1;
+		$orderfull->final_price = 1;
+ 		$orderfull->gst = 1;
+ 
+		$orderfull->save();
+
+		
     	$cartItems = \Cart::getContent();
-    	$tableorder = new TableOrder;
-    	$price=0;
+    	$total_price=0;
     	foreach($cartItems as $cartItemsR)
     	{
+    		$tableorder = new TableOrder;
     		$tableorder->item_id = $cartItemsR->id;
     		$tableorder->unit_price = $cartItemsR->price;
     		$tableorder->quantity = $cartItemsR->quantity;
     		$tableorder->price = $cartItemsR->price*$cartItemsR->quantity;
+    		$tableorder->order_id = $orderfull->id;
+			$tableorder->save();
 
-    		$price += $cartItemsR->price;
+    		$total_price += $tableorder->price;
     	}
     	$gst =10;
-    	$final_price = $gst+$price;
+    	$final_price = $gst+$total_price;
 
-    	$orderfull = new Order;
+    	$orderfinal = Order::find($orderfull->id);
+
+		$orderfinal->total_price = $total_price;
+		$orderfinal->final_price = $final_price;
+ 		$orderfinal->gst = $gst;
  
-		$orderfull->total_price = $price;
-		$orderfull->final_price = $final_price;
- 		$orderfull->gst = $gst;
- 
-		$orderfull->save();
+		$orderfinal->update();
 
-		$tableorder->order_id = $orderfull->id;
+		
 
-		$tableorder->save();
+		//dd($tableorder);
 
 		\Cart::clear();
 
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
-		return redirect('/');
+		return redirect('invoice/'.$orderfull->id);
 
     }
 
@@ -129,6 +149,17 @@ class TableOrderController extends Controller
 		// Pass to view
 		return view('view-orders')->with("allorders",$allorders);
     }
+
+    public function showInvoiceData($id)
+    {
+    	$orderDetail = Order::getOrderDataOrderID($id);
+    	$tableOrderDetail = TableOrder::getTableOrderDataOrderID($id);
+
+		// Pass to view
+		return view('invoice')->with("orderDetail",$orderDetail)->with("tableOrderDetail",$tableOrderDetail);
+    }
+
+    
 
 
 }

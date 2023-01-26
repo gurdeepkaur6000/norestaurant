@@ -28,11 +28,5 @@ class Category extends Model
         DB::delete("delete from category where id ='$id'");
     }
 
-    public function postHasOneCategoryBelongs()
-    {
-        //$article=Article::with("comment")->first();
-        return $this->hasOne(Category::class);
-    }
-
     
 }
