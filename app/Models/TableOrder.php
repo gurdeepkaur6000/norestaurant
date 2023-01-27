@@ -14,7 +14,11 @@ class TableOrder extends Model
 
     public static function getTableOrderDataOrderID($order_id)
     {
-    	$value=DB::table('tableorder')->where('order_id',$order_id)->get();
+    	$value=DB::table('tableorder')
+    	->join('posts', 'posts.id', '=', 'tableorder.item_id')
+        ->select('tableorder.*', 'posts.title')
+               
+    	->where('order_id',$order_id)->get();
     	return $value;
     }
 }

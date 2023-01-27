@@ -89,6 +89,10 @@
 		<div class="clear-fix"></div>
 			<table border='1' cellspacing='0'>
 				<tr>
+					<td colspan='4' class='text-center'><h3>Order number - {{$orderDetail->id}}</h3></td>
+					
+				</tr>
+				<tr>
 					<td colspan='4' class='text-left'>Table Number - {{$orderDetail->tablenumber_id}}</td>
 					
 				</tr>
@@ -102,7 +106,7 @@
 
 				@foreach($tableOrderDetail as $tableorderDetailR)
 				<tr>
-					<td>{{$tableorderDetailR->item_id}}</td>
+					<td>{{$tableorderDetailR->title}}</td>
 					<td class='text-right'>{{$tableorderDetailR->quantity}}</td>
 					<td class='text-right'>€{{$tableorderDetailR->unit_price}}</td>
 					<td class='text-right'>€{{$tableorderDetailR->price}}</td>
