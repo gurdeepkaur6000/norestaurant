@@ -1,5 +1,6 @@
 @extends('layout')
-  
+<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}" />
+
 @section('content')
 <main class="login-form">
     <div class="cotainer">
@@ -11,7 +12,7 @@
                     <p class="text-green-800">{{ $message }}</p>
                 </div>
                 @endif
-                <div class="col-sm-12">
+                <div class="shopping-cart">
 
                         <table class="w-full text-sm lg:text-base" cellspacing="0">
                             <thead>
@@ -28,13 +29,13 @@
                               </thead>
                               <tbody>
                                   @foreach ($cartItems as $item)
-                                <tr>
+                                <tr class="product">
                                     {{--<td class="hidden pb-4 md:table-cell">
                                     <a href="#">
                                       <img src="{{ $item->attributes->image }}" class="w-20 rounded" alt="Thumbnail">
                                     </a>
                                     </td>--}}
-                                    <td>
+                                    <td class="product-title">
                                         <a href="#">
                                           <p class="mb-2 md:ml-4 text-purple-600 font-bold">{{ $item->name }}</p>
                                           
