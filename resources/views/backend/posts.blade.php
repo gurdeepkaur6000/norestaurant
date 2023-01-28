@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        @include('sidebar')
+        @include('backend.sidebar')
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-header">
@@ -16,6 +16,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Category</th>
+                          <th scope="col">Sub-Category</th>
                           <th scope="col">Title</th>
                           <th scope="col">Description</th>
                           <th scope="col">Price</th>
@@ -24,7 +25,8 @@
                       </thead>
                       @foreach($postData as $postDataResult)
                       <tr>
-                        <td>{{ $postDataResult->category_id }}</td>
+                        <td>{{ $postDataResult->category_name }}</td>
+                        <td>{{ $postDataResult->sub_category_name }}</td>
                         <td>{{ $postDataResult->title }}</td>
                         <td>{{ $postDataResult->description }}</td>
                         <td>{{ $postDataResult->price }}</td>

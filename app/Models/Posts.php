@@ -19,7 +19,11 @@ class Posts extends Model
 
     public static function getPostData()
     {
-    	$value=DB::table('posts')->orderBy('id', 'asc')->get();
+    	$value=DB::table('posts')
+        ->join('category as c', 'c.id', '=', 'posts.category_id')
+        ->leftJoin('category as c1', 'c1.id', '=', 'posts.sub_category_id')
+        ->select('posts.*','c.title as category_name','c1.title as sub_category_name')
+        ->orderBy('posts.id', 'asc')->get();
     	return $value;
     }
 

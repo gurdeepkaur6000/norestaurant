@@ -19,7 +19,16 @@ class Category extends Model
 
     public static function getCategoryData()
     {
-        $value=DB::table('category')->orderBy('id', 'desc')->get();
+        $value=DB::table('category')->where('parent_id',0)->orderBy('id', 'desc')->get();
+        return $value;
+    }
+
+    public static function getSubCategoryData()
+    {
+        $value=DB::table('category as c')
+        ->join('category as c1', 'c1.id', '=', 'c.parent_id')
+        ->select('c.*','c1.title as category_name')
+        ->where('c.parent_id','!=',0)->orderBy('c.id', 'desc')->get();
         return $value;
     }
 
@@ -27,6 +36,13 @@ class Category extends Model
     {
         DB::delete("delete from category where id ='$id'");
     }
+
+    public static function deleteSubCategoryData($id)
+    {
+        DB::delete("delete from category where id ='$id'");
+    }
+
+    
 
     
 }

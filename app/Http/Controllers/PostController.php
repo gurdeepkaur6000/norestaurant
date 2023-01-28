@@ -15,16 +15,17 @@ class PostController extends Controller
         $postData = Posts::getPostData();
 
 	    // Pass to view
-	    return view('posts')->with("postData",$postData);
+	    return view('backend.posts')->with("postData",$postData);
     }
 
     public function showCreatePost()
     {
         $categoryData = Category::getCategoryData();
+        $subcategoryData = Category::getSubCategoryData();
         //$categoryData = $posts->postHasOneCategory();
         //dd($categoryData);
         
-        return view('add-post')->with("categoryData",$categoryData);
+        return view('backend.add-post')->with("categoryData",$categoryData)->with("subcategoryData",$subcategoryData);
     }
 
     public function createPostData(Request $request)
@@ -35,6 +36,7 @@ class PostController extends Controller
 		$posts->description = $request->input('description');
         $posts->status = 1;
         $posts->category_id = $request->input('category_id');
+        $posts->sub_category_id = $request->input('sub_category_id');
         $posts->price = $request->input('price');
  
 		$posts->save();
@@ -50,7 +52,9 @@ class PostController extends Controller
     {
         $postData = Posts::find($id);
         $categoryData = Category::getCategoryData();
-        return view('edit-post')->with("postData",$postData)->with("categoryData",$categoryData);
+        $subcategoryData = Category::getSubCategoryData();
+        
+        return view('backend.edit-post')->with("postData",$postData)->with("categoryData",$categoryData)->with("subcategoryData",$subcategoryData);
     }
 
     public function updatePostData(Request $request, $id)
@@ -62,6 +66,7 @@ class PostController extends Controller
         $postData->status = $request->input('status');
         $postData->price = $request->input('price');
         $postData->category_id = $request->input('category_id');
+        $postData->sub_category_id = $request->input('sub_category_id');
        
         $postData->update();
 

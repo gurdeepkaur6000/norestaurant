@@ -68,7 +68,7 @@ class AuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
          
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        return redirect("backend.dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
     
     /**
@@ -79,7 +79,7 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('dashboard');
+            return view('backend.dashboard');
         }
   
         return redirect("login")->withSuccess('Opps! You do not have access');

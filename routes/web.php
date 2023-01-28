@@ -37,27 +37,47 @@ Route::post('post-registration', 'App\Http\Controllers\Auth\AuthController@postR
 //login and registration apis ends
 
 /**Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); **/
+Route::middleware('auth')->group( function () {
 
-Route::get('dashboard', 'App\Http\Controllers\Auth\AuthController@dashboard'); 
-Route::get('view-orders', 'App\Http\Controllers\TableOrderController@viewOrderData');
-
-//categories starts
-Route::get('categories', 'App\Http\Controllers\CategoryController@showCategoryData');
-Route::get('add-category', 'App\Http\Controllers\CategoryController@showCreateCategory');
-Route::post('create-category', 'App\Http\Controllers\CategoryController@createCategoryData'); 
-Route::get('edit-category/{id}', 'App\Http\Controllers\CategoryController@showEditCategory');
-Route::put('update-category/{id}', 'App\Http\Controllers\CategoryController@updateCategoryData'); 
-Route::get('delete-category/{id}', 'App\Http\Controllers\CategoryController@showDeleteCategory');
-//categories ends
-
-//posts starts
-Route::get('posts', 'App\Http\Controllers\PostController@showPostData');
-Route::put('update-post/{id}', 'App\Http\Controllers\PostController@updatePostData'); 
-Route::post('create-post', 'App\Http\Controllers\PostController@createPostData'); 
-Route::get('edit-post/{id}', 'App\Http\Controllers\PostController@showEditPost');
-Route::get('add-post', 'App\Http\Controllers\PostController@showCreatePost');
-Route::get('delete-post/{id}', 'App\Http\Controllers\PostController@deletePostData');
-//posts ends
+	Route::get('dashboard', 'App\Http\Controllers\Auth\AuthController@dashboard'); 
+	Route::get('view-orders', 'App\Http\Controllers\TableOrderController@viewOrderData');
 
 
+	//categories starts
+	Route::get('categories', 'App\Http\Controllers\CategoryController@showCategoryData');
+	Route::get('add-category', 'App\Http\Controllers\CategoryController@showCreateCategory');
+	Route::post('create-category', 'App\Http\Controllers\CategoryController@createCategoryData'); 
+	Route::get('edit-category/{id}', 'App\Http\Controllers\CategoryController@showEditCategory');
+	Route::put('update-category/{id}', 'App\Http\Controllers\CategoryController@updateCategoryData'); 
+	Route::get('delete-category/{id}', 'App\Http\Controllers\CategoryController@showDeleteCategory');
+	//categories ends
+
+	//sub-categories starts
+	Route::get('sub-categories', 'App\Http\Controllers\CategoryController@showSubCategoryData');
+	Route::get('add-sub-category', 'App\Http\Controllers\CategoryController@showCreateSubCategory');
+	Route::post('create-sub-category', 'App\Http\Controllers\CategoryController@createSubCategoryData'); 
+	Route::get('edit-sub-category/{id}', 'App\Http\Controllers\CategoryController@showEditSubCategory');
+	Route::put('update-sub-category/{id}', 'App\Http\Controllers\CategoryController@updateSubCategoryData'); 
+	Route::get('delete-sub-category/{id}', 'App\Http\Controllers\CategoryController@showDeleteSubCategory');
+	//sub-categories ends
+
+	//TABLENUMBER starts
+	Route::get('tablename', 'App\Http\Controllers\TablenumberController@showTNData');
+	Route::get('add-tablename', 'App\Http\Controllers\TablenumberController@showCreateTN');
+	Route::post('create-tablename', 'App\Http\Controllers\TablenumberController@createTNData'); 
+	Route::get('edit-tablename/{id}', 'App\Http\Controllers\TablenumberController@showEditTN');
+	Route::put('update-tablename/{id}', 'App\Http\Controllers\TablenumberController@updateTNData'); 
+	Route::get('delete-tablename/{id}', 'App\Http\Controllers\TablenumberController@showDeleteTN');
+	//TABLENUMBER ends
+
+	//posts starts
+	Route::get('posts', 'App\Http\Controllers\PostController@showPostData');
+	Route::put('update-post/{id}', 'App\Http\Controllers\PostController@updatePostData'); 
+	Route::post('create-post', 'App\Http\Controllers\PostController@createPostData'); 
+	Route::get('edit-post/{id}', 'App\Http\Controllers\PostController@showEditPost');
+	Route::get('add-post', 'App\Http\Controllers\PostController@showCreatePost');
+	Route::get('delete-post/{id}', 'App\Http\Controllers\PostController@deletePostData');
+	//posts ends
+
+});
 
