@@ -21,4 +21,9 @@ class TableOrder extends Model
     	->where('order_id',$order_id)->get();
     	return $value;
     }
+
+    public static function deleteTableOrderByOrderid($orderid)
+    {
+        DB::delete("delete from tableorder where order_id ='$orderid'");
+    }
 }

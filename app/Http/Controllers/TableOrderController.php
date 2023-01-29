@@ -6,31 +6,74 @@ use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Category;
 use App\Models\TableOrder;
+use App\Models\TableNumber;
 use App\Models\Order;
+use App\Helpers\Helpers;
 
 class TableOrderController extends Controller
 {
-	public function showTableOrderData()
+	public function showTableNumberData()
     {
-	    // Read value from Model method
-	    $postData = Posts::getPostData();
-	    $categoryData = Category::getCategoryData();
+        // Read value from Model method
+        //$tnData = TableNumber::getTNData();
+        // Pass to view
+
+        \Cart::clear();
+
+        return view('home');
+    }
+
+    public function getTableNumberData()
+    {
+        // Read value from Model method
+        $tnData = TableNumber::getTNData();
+        // Pass to view
+        return json_encode($tnData);
+    }
+
+    public function showTablePostData($tableid,$orderid)
+    {
+        // Read value from Model method
+        // Pass to view
+        return view('items')->with('tableid',$tableid)->with('orderid',$orderid);
+    }
+
+    public function getTablePostData(Request $request)
+    {
+        $input = $request->all();
+        $tableid = $input['tableid'];
+        $orderid = $input['orderid'];
+        // Read value from Model method
+        $onetnData = TableNumber::find($tableid);
+        $postData = Posts::getPostData();
+        $categoryData = Category::getCategoryData();
+        $subcategoryData = Category::getSubCategoryData();
         $cartItems = \Cart::getContent();
 
-		// Pass to view
-		return view('home')->with("postData",$postData)->with("categoryData",$categoryData)->with("cartItems",$cartItems);
-	}
+        $arr = array(
+            'postData'=>$postData,
+            'categoryData'=>$categoryData,
+            'subcategoryData'=>$subcategoryData,
+            'cartItems'=>$cartItems,
+            'onetnData'=>$onetnData
+        );
 
-	public function cartList()
+        // Pass to view
+        return json_encode($arr);
+    }
+
+	public function cartList($tableid,$orderid)
     {
         $cartItems = \Cart::getContent();
         if(count($cartItems)>0)
         {
-        	return view('cart', compact('cartItems'));
+            return view('cart')->with('tableid',$tableid)->with('orderid',$orderid)->with('cartItems',$cartItems);
+        	//return view('cart', compact('cartItems'));
         }
         else
         {
-        	//(new TableOrderController)->showTableOrderData();
+            return redirect('/home');
+            //(new TableOrderController)->showTableOrderData();
         	//$this->showTableOrderData();
         }
         
@@ -39,6 +82,10 @@ class TableOrderController extends Controller
 
     public function addToCart(Request $request)
     {
+        //dd("nnnn");
+        $tableid = $request->tableid;
+        $orderid = $request->orderid;
+
         \Cart::add([
             'id' => $request->id,
             'name' => $request->name,
@@ -48,17 +95,23 @@ class TableOrderController extends Controller
                 'image' => $request->image,
             )
         ]);
-        session()->flash('success', 'Product is Added to Cart Successfully !');
+
+        session()->flash('success', 'Item is Added to Cart Successfully !');
 
         $cartItems = \Cart::getContent();
 
-        return redirect('/');
+        $update_orderid = cartOrderCommonDB($tableid,$orderid,$cartItems);
+
+        return redirect('/cart/'.$tableid.'/'.$update_orderid);
 
         //return redirect()->route('cart.list');
     }
 
     public function updateCart(Request $request)
     {
+        $tableid = $request->tableid;
+        $orderid = $request->orderid;
+
         \Cart::update(
             $request->id,
             [
@@ -69,19 +122,32 @@ class TableOrderController extends Controller
             ]
         );
 
+        $cartItems = \Cart::getContent();
+
+        $update_orderid = cartOrderCommonDB($tableid,$orderid,$cartItems);
+
         session()->flash('success', 'Item Cart is Updated Successfully !');
 
-        
+        return redirect('/cart/'.$tableid.'/'.$update_orderid);
 
-        return redirect()->route('cart.list');
+        //return redirect()->route('cart.list');
     }
 
     public function removeCart(Request $request)
     {
+        $tableid = $request->tableid;
+        $orderid = $request->orderid;
+
         \Cart::remove($request->id);
+
+        $cartItems = \Cart::getContent();
+
+        $update_orderid = cartOrderCommonDB($tableid,$orderid,$cartItems);
+
         session()->flash('success', 'Item Cart Remove Successfully !');
 
-        return redirect()->route('cart.list');
+        //return redirect()->route('cart.list');
+        return redirect('/cart/'.$tableid.'/'.$update_orderid);
     }
 
     public function orderCart(Request $request)
@@ -135,18 +201,26 @@ class TableOrderController extends Controller
 
     }
 
-    public function clearAllCart()
+    public function clearAllCart(Request $request)
     {
+        $tableid = $request->tableid;
+        $orderid = $request->orderid;
+
         \Cart::clear();
+
+        $cartItems = \Cart::getContent();
+
+        $update_orderid = cartOrderCommonDB($tableid,$orderid,$cartItems);
 
         session()->flash('success', 'All Item Cart Clear Successfully !');
 
-        return redirect()->route('cart.list');
+        //return redirect()->route('cart.list');
+        return redirect('/items/'.$tableid.'/'.$update_orderid);
     }
 
     public function viewOrderData()
     {
-    	$allorders = Order::All();
+    	$allorders = Order::getAllOrderData();
 
 		// Pass to view
 		return view('view-orders')->with("allorders",$allorders);

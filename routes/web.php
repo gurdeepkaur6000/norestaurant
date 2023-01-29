@@ -17,14 +17,23 @@ use App\Http\Controllers\TableOrderController;
 
 Route::get('invoice/{id}', 'App\Http\Controllers\TableOrderController@showInvoiceData');
 
-Route::get('/', 'App\Http\Controllers\TableOrderController@showTableOrderData');
+Route::get('/', 'App\Http\Controllers\TableOrderController@showTableNumberData');
+Route::get('/get-Table-Number', 'App\Http\Controllers\TableOrderController@getTableNumberData');
 
+Route::get('/items/{tableid}/{orderid}', 'App\Http\Controllers\TableOrderController@showTablePostData');
+
+Route::post('get-table-post-data', 'App\Http\Controllers\TableOrderController@getTablePostData');
+
+//cart page starts 
 Route::post('update-cart', [TableOrderController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [TableOrderController::class, 'removeCart'])->name('cart.remove');
 Route::post('order', [TableOrderController::class, 'orderCart'])->name('cart.order');
 Route::post('clear', [TableOrderController::class, 'clearAllCart'])->name('cart.clear');
-Route::get('cart', [TableOrderController::class, 'cartList'])->name('cart.list');
+Route::get('cart/{tableid}/{orderid}', [TableOrderController::class, 'cartList'])->name('cart.list');
 Route::post('cart', [TableOrderController::class, 'addToCart'])->name('cart.store');
+
+//cart page ends
+
 //Route::get('login', [AuthController::class, 'login'])->name('login');
 //Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 

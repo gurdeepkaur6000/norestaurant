@@ -1,7 +1,7 @@
 @extends('layout')
   
 @section('content')
-<main class="login-form">
+<main class="login-form" ng-app="myApp" ng-controller="myCtrl" ng-init="getCartPage(<?php echo $tableid; ?>,<?php echo $orderid; ?>);">
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-12 text-center">
@@ -46,6 +46,8 @@
                                         
                                         <form action="{{ route('cart.update') }}" method="POST">
                                           @csrf
+                                          <input type="text" name="tableid" value="<?php echo $tableid; ?>" />
+                                          <input type="text" name="orderid" value="<?php echo $orderid; ?>" />
                                           <input type="hidden" name="id" value="{{ $item->id}}" >
                                         <input type="text" name="quantity" value="{{ $item->quantity }}" 
                                         class="w-16 text-center h-6 text-gray-800 outline-none rounded border border-blue-600" />
@@ -62,6 +64,8 @@
                                   <td class="hidden text-right md:table-cell">
                                     <form action="{{ route('cart.remove') }}" method="POST">
                                       @csrf
+                                      <input type="text" name="tableid" value="<?php echo $tableid; ?>" />
+                                      <input type="text" name="orderid" value="<?php echo $orderid; ?>" />
                                       <input type="hidden" value="{{ $item->id }}" name="id">
                                       <button class="px-4 py-2 text-black bg-red-600 shadow rounded-full">x</button>
                                   </form>
@@ -77,8 +81,16 @@
                     Total: ${{ Cart::getTotal() }}
                 </div>
                 <div>
+                    <a href="{{ url('items') }}/<?php echo $tableid; ?>/<?php echo $orderid; ?>">
+                      <button class="px-6 py-2 text-sm  rounded shadow text-red-100 bg-red-500">Add Items</button>
+                    </a>
+                    
+                </div>
+                <div>
                     <form action="{{ route('cart.clear') }}" method="POST">
                         @csrf
+                        <input type="text" name="tableid" value="<?php echo $tableid; ?>" />
+                        <input type="text" name="orderid" value="<?php echo $orderid; ?>" />
                         <button class="px-6 py-2 text-sm  rounded shadow text-red-100 bg-red-500">Clear Carts</button>
                     </form>
                 </div>

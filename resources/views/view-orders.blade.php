@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        @include('sidebar')
+        @include('backend.sidebar')
         <div class="col-sm-10">
             <div class="card">
                 <div class="card-header">
@@ -15,19 +15,20 @@
                     <table border='1' style='border-collapse: collapse;'  class="table">
                       <thead>
                         <tr>
-                          <th scope="col">Category</th>
-                          <th scope="col">Title</th>
-                          <th scope="col">Description</th>
+                          <th scope="col">OrderID</th>
+                          <th scope="col">Table Name</th>
                           <th scope="col">Price</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">GST</th>
+                          <th scope="col">Final Price</th>
                         </tr>
                       </thead>
                       @foreach($allorders as $allordersR)
                       <tr>
-                        <td>{{ $allordersR->category_id }}</td>
-                        <td>{{ $allordersR->title }}</td>
-                        <td>{{ $allordersR->description }}</td>
-                        <td>{{ $allordersR->price }}</td>
+                        <td>{{ $allordersR->id }}</td>
+                        <td>{{ $allordersR->table_name }}</td>
+                        <td>{{ $allordersR->total_price }}</td>
+                        <td>{{ $allordersR->gst }}</td>
+                        <td>{{ $allordersR->final_price }}</td>
                         <td>
                           <a href="{{ url('edit-post') }}/{{ $allordersR->id }}" class="btn btn-success float-end">
                             <i class="fa fa-invoice"></i>

@@ -18,5 +18,14 @@ class Order extends Model
     	return $value;
     }
 
+    public static function getAllOrderData()
+    {
+    	$value=DB::table('order')
+    	->join('tablenumber', 'tablenumber.id', '=', 'order.tablenumber_id')
+        ->select('order.*', 'tablenumber.table_name')             
+    	->get();
+    	return $value;
+    }
+
     
 }
