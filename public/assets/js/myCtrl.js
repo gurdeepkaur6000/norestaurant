@@ -31,6 +31,13 @@ app.controller("myCtrl", function($scope,$http,$window) {
 		});
 	}
 
+	function getPostsFromCat()
+	{
+		console.log("jjjjj");
+		var value = document.getElementById('item-category').value;
+		console.log(value);
+	}
+
 	//startTableCategory
 
 //end
