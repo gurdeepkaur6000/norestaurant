@@ -89,18 +89,18 @@
 		<div class="clear-fix"></div>
 			<table border='1' cellspacing='0'>
 				<tr>
-					<td colspan='4' class='text-center'><h3>Order number - {{$orderDetail->id}}</h3></td>
+					<td colspan='4' class='text-center'><h1>Order #{{$orderDetail->id}}</h1></td>
 					
 				</tr>
 				<tr>
-					<td colspan='4' class='text-left'>Table Number - {{$orderDetail->tablenumber_id}}</td>
+					<td colspan='4' class='text-center'><h2>Table Number - {{$orderDetail->table_name}}</h2></td>
 					
 				</tr>
 				<tr>
-					<th width=250>Item</th>
-					<th width=80>Quantity</th>
-					<th width=100>Unit price</th>
-					<th width=100>Total price</th>
+					<th width=250><h3>Item</h3></th>
+					<th width=80><h3>Quantity</h3></th>
+					<th width=100><h3>Unit price</h3></th>
+					<th width=100><h3>Total price</h3></th>
 				</tr>
 
 

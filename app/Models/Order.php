@@ -14,7 +14,11 @@ class Order extends Model
 
     public static function getOrderDataOrderID($order_id)
     {
-    	$value=DB::table('order')->where('id',$order_id)->orderBy('id', 'asc')->first();
+    	$value=DB::table('order')
+        ->join('tablenumber', 'tablenumber.id', '=', 'order.tablenumber_id')
+        ->select('order.*', 'tablenumber.table_name') 
+        ->where('order.id',$order_id)
+        ->orderBy('order.id', 'asc')->first();
     	return $value;
     }
 

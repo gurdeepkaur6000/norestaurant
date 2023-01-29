@@ -95,19 +95,15 @@
                     </form>
                 </div>
                 <div>
-
-                    <form action="{{ route('cart.order') }}" method="POST">
+                  <a href="{{ url('invoice') }}/<?php echo $orderid; ?>" class="btn btn-success float-end">
+                            <i class="fa fa-invoice">Invoice</i>
+                          </a>
+                    {{--<form action="{{ route('cart.order') }}" method="POST">
                     @csrf
-                    <select name="tablenumber">
-                      <option value="1">Table 1</option>
-                      <option value="2">Table 2</option>
-                      <option value="3">Table 3</option>
-                      <option value="4">Table 4</option>
-                      <option value="5">Table 5</option>
-                      <option value="6">Table 6</option>
-                    </select>
-                    <button class="px-6 py-2 text-sm  rounded shadow text-red-100 bg-red-500">Place Order</button>
-                    </form>
+                    <input type="text" name="tableid" value="<?php echo $tableid; ?>" />
+                    <input type="text" name="orderid" value="<?php echo $orderid; ?>" />
+                    <button class="px-6 py-2 text-sm  rounded shadow text-red-100 bg-red-500">Invoice</button>
+                    </form>--}}
                 </div>
             </div>
         </div>

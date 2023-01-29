@@ -30,8 +30,8 @@
                         <td>{{ $allordersR->gst }}</td>
                         <td>{{ $allordersR->final_price }}</td>
                         <td>
-                          <a href="{{ url('edit-post') }}/{{ $allordersR->id }}" class="btn btn-success float-end">
-                            <i class="fa fa-invoice"></i>
+                          <a href="{{ url('invoice') }}/{{ $allordersR->id }}" class="btn btn-success float-end">
+                            <i class="fa fa-invoice">Invoice</i>
                           </a>
                           
                         </td>
