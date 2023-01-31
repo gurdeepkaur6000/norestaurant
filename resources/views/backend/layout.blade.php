@@ -5,19 +5,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="{{ asset('assets/css/internal.css') }}" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
   
-        body{
-            margin: 0;
-            font-size: .9rem;
-            font-weight: 400;
-            line-height: 1.6;
-            color: #212529;
-            text-align: left;
-            background-color: #f5f8fa;
-        }
+        
         .navbar-laravel
         {
             box-shadow: 0 2px 4px rgba(0,0,0,.04);
@@ -83,6 +78,7 @@
 </nav>
   
 @yield('content')
-     
+    <script src="{{ asset('assets/js/myApp.js') }}"></script>
+    <script src="{{ asset('assets/js/myHash.js') }}"></script>     
 </body>
 </html>

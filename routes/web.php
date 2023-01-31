@@ -17,6 +17,10 @@ use App\Http\Controllers\TableOrderController;
 
 Route::get('invoice/{id}', 'App\Http\Controllers\TableOrderController@showInvoiceData');
 
+Route::get('delete-invoice/{id}', 'App\Http\Controllers\TableOrderController@deleteInvoiceData');
+
+
+
 Route::get('/', 'App\Http\Controllers\TableOrderController@showTableNumberData');
 Route::get('/get-Table-Number', 'App\Http\Controllers\TableOrderController@getTableNumberData');
 
@@ -50,6 +54,7 @@ Route::middleware('auth')->group( function () {
 
 	Route::get('dashboard', 'App\Http\Controllers\Auth\AuthController@dashboard'); 
 	Route::get('view-orders', 'App\Http\Controllers\TableOrderController@viewOrderData');
+	Route::get('get-order-data-by-id/{id}', 'App\Http\Controllers\TableOrderController@getOrderDataByID'); 
 
 
 	//categories starts

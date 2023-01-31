@@ -26,9 +26,16 @@ class Order extends Model
     {
     	$value=DB::table('order')
     	->join('tablenumber', 'tablenumber.id', '=', 'order.tablenumber_id')
-        ->select('order.*', 'tablenumber.table_name')             
+        ->select('order.*', 'tablenumber.table_name')
+        ->orderBy('order.id','desc')             
     	->get();
     	return $value;
+    }
+
+    public static function deleteInvoiceDataID($id)
+    {
+        DB::delete("delete from `order` where id ='$id'");
+        DB::delete("delete from tableorder where order_id ='$id'");
     }
 
     

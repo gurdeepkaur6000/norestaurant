@@ -9,7 +9,7 @@
                 <h1>Order Food</h1>
                 <h3>Table - @{{onetnData.table_name}}</h3>
 				<div class="col-sm-12" style="margin-bottom: 20px;">
-					<select class="form-control section" id="item-category" onselect="getPostsFromCat();">
+					<select class="form-control section" id="item-category" ng-select="getPostsFromCat();">
 						<option value="">Select Category</option>
 						<option ng-repeat="categoryDataR in categoryData" value="@{{categoryDataR.id}}">@{{categoryDataR.title}}</option>
 					</select>

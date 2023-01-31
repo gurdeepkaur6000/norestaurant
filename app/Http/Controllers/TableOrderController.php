@@ -223,7 +223,7 @@ class TableOrderController extends Controller
     	$allorders = Order::getAllOrderData();
 
 		// Pass to view
-		return view('view-orders')->with("allorders",$allorders);
+		return view('backend/view-orders')->with("allorders",$allorders);
     }
 
     public function showInvoiceData($id)
@@ -235,6 +235,30 @@ class TableOrderController extends Controller
 		return view('invoice')->with("orderDetail",$orderDetail)->with("tableOrderDetail",$tableOrderDetail);
     }
 
+    public function getOrderDataByID($id)
+    {
+        $orderDetail = Order::getOrderDataOrderID($id);
+        $tableOrderDetail = TableOrder::getTableOrderDataOrderID($id);
+
+        $arr = array(
+            'orderDetail'=>$orderDetail,
+            'tableOrderDetail'=>$tableOrderDetail
+        );
+
+        // Pass to view
+        return json_encode($arr);
+    }
+
+
+    public function deleteInvoiceData($id)
+    {
+        $orderDetail = Order::deleteInvoiceDataID($id);
+        
+        $allorders = Order::getAllOrderData();
+
+        // Pass to view
+        return view('backend/view-orders')->with("allorders",$allorders);
+    }
     
 
 
