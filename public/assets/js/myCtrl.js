@@ -31,11 +31,55 @@ app.controller("myCtrl", function($scope,$http,$window) {
 		});
 	}
 
-	function getPostsFromCat()
+	$scope.getPostsFromCat=function()
 	{
-		console.log("jjjjj");
-		var value = document.getElementById('item-category').value;
-		console.log(value);
+		$scope.subpostDataSelect = [];
+		var catvalue = document.getElementById('item-category').value;
+		$scope.catvalue = catvalue;
+		$scope.subcategoryDataSelect = [];
+		angular.forEach($scope.subcategoryData, function (value, key) {
+            if(value.parent_id==catvalue)
+            {
+            	$scope.subcategoryDataSelect.push(value);
+            	//console.log(value.parent_id);
+            }          
+        }); 
+        setTimeout(function(){
+		$scope.$apply(function () {
+        if($scope.subcategoryDataSelect.length==0)
+	    {       
+	        	angular.forEach($scope.postData, function (value, key) {
+					if(value.category_id==$scope.catvalue)
+		            {
+		            	
+			            	$scope.subpostDataSelect.push(value);
+
+		            	
+		            }          
+		        }); 
+	    }
+	     }); });
+
+	    console.log($scope.subpostDataSelect);
+        
+
+        
+	}
+
+	$scope.getPostsFrom=function()
+	{
+		var postvalue = document.getElementById('item-post').value;
+
+		$scope.subpostDataSelect = [];
+		angular.forEach($scope.postData, function (value, key) {
+			if(value.sub_category_id==postvalue && value.category_id==$scope.catvalue)
+            {
+            	$scope.subpostDataSelect.push(value);
+            	//console.log(value.parent_id);
+            }          
+        }); 
+
+        //console.log($scope.subpostDataSelect);
 	}
 
 	//startTableCategory

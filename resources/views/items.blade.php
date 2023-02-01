@@ -9,19 +9,19 @@
                 <h1>Order Food</h1>
                 <h3>Table - @{{onetnData.table_name}}</h3>
 				<div class="col-sm-12" style="margin-bottom: 20px;">
-					<select class="form-control section" id="item-category" ng-select="getPostsFromCat();">
+					<select class="form-control section" id="item-category" ng-model="itemcategory" ng-change="getPostsFromCat();">
 						<option value="">Select Category</option>
 						<option ng-repeat="categoryDataR in categoryData" value="@{{categoryDataR.id}}">@{{categoryDataR.title}}</option>
 					</select>
 				</div>
-				<div class="col-sm-12" style="margin-bottom: 20px;">
-					<select class="form-control section" ng-show="subcategoryData"  ng-select="getPostsFrom(subcategoryDataR);" >
+				<div class="col-sm-12" style="margin-bottom: 20px;" ng-show="subcategoryDataSelect.length>0">
+					<select class="form-control section" id="item-post" ng-model="itemsubcategory" ng-model="subcategoryData"  ng-change="getPostsFrom();" >
 						<option value="">Select Sub-category</option>
-						<option ng-repeat="subcategoryDataR in subcategoryData" value="@{{subcategoryDataR.id}}">@{{subcategoryDataR.title}}</option>
+						<option ng-repeat="subcategoryDataSelectR in subcategoryDataSelect" value="@{{subcategoryDataSelectR.id}}">@{{subcategoryDataSelectR.title}}</option>
 					</select>
 				</div>
-				<div class="col-sm-12" style="margin-bottom: 20px;">
-					<div class="product" ng-show="postData" ng-repeat="product in postData" >
+				<div class="col-sm-12" style="margin-bottom: 20px;" ng-show="subpostDataSelect.length>0">
+					<div class="product" ng-repeat="product in subpostDataSelect" >
 		        		<div class="textboxmain">
 							<div class="titleproduct item">@{{ product.title }}</div>
 							<p class="titleproduct price">$@{{ product.price }}</p>

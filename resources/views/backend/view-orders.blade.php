@@ -36,6 +36,9 @@
                           <a href="javascript://" ng-click="showSub({{ $allordersR->id }});" class="btn btn-primary">
                             View Items
                           </a>
+                          <a target="_blank" href="/cart/{{ $allordersR->tablenumber_id }}/{{ $allordersR->id }}" class="btn btn-primary">
+                            Add more Items
+                          </a>
                           <a href="{{ url('delete-invoice') }}/{{ $allordersR->id }}" class="btn btn-danger float-end">
                             Delete
                           </a>
