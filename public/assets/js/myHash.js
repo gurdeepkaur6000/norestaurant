@@ -27,6 +27,38 @@ app.controller("myHash", function($scope,$http,$window) {
 
 	}
 
+
+	$scope.showSubCategory=function()
+	{
+		$scope.subpostDataSelect = [];
+		var catvalue = document.getElementById('categoryid').value;
+		$scope.catvalue = catvalue;
+		$scope.subcategoryDataSelect = [];
+
+		$scope.tnData = {};
+		$http.get($url+"get-subcategory-data/"+catvalue).then(function(response) {
+			$scope.subcategoryDataSelect = response.data.subcategoryData;
+		});
+
+        
+	}
+
+	$scope.showeditSubCategory=function()
+	{
+		$scope.subpostDataSelect = [];
+		var catvalue = document.getElementById('categoryid').value;
+		$scope.catvalue = catvalue;
+		$scope.subcategoryDataSelect = [];
+
+		$scope.tnData = {};
+		$http.get($url+"get-subcategory-data/"+catvalue).then(function(response) {
+			$scope.subcategoryDataSelect = response.data.subcategoryData;
+		});
+
+        
+	}
+	
+
 	
 
    	

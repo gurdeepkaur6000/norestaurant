@@ -1,7 +1,7 @@
 @extends('backend/layout')
   
 @section('content')
-<div class="container">
+<div class="container" ng-app="myApp" ng-controller="myHash">
     <div class="row">
         <div class="col-md-12">
 
@@ -23,7 +23,7 @@
 
                         <div class="form-group mb-3">
                             <label for="">Select Category</label>
-                            <select type="text" name="category_id" value="" class="form-control" required>
+                            <select name="category_id" value="" class="form-control" required ng-change="showSubCategory();" ng-model="category_id" id="categoryid">
                                 <option value="0">Select Category</option>
                                 @foreach($categoryData as $categoriesR)
                                 <option value="{{$categoriesR->id}}">{{$categoriesR->title}}</option>
@@ -32,11 +32,10 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Select Sub-Category</label>
-                            <select type="text" name="sub_category_id" value="" class="form-control">
+                            <select name="sub_category_id" class="form-control" ng-model="sub_category_id">
                                 <option value="0">Select Sub-Category</option>
-                                @foreach($subcategoryData as $subcategoriesR)
-                                <option value="{{$subcategoriesR->id}}">{{$subcategoriesR->title}}</option>
-                                @endforeach
+                                <option ng-repeat="subcategoryDataSelectR in subcategoryDataSelect" value="@{{subcategoryDataSelectR.id}}">@{{subcategoryDataSelectR.title}}</option>                               
+              
                             </select>
                         </div>
                         <div class="form-group mb-3">

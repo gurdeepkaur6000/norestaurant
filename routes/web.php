@@ -91,6 +91,8 @@ Route::middleware('auth')->group( function () {
 	Route::get('edit-post/{id}', 'App\Http\Controllers\PostController@showEditPost');
 	Route::get('add-post', 'App\Http\Controllers\PostController@showCreatePost');
 	Route::get('delete-post/{id}', 'App\Http\Controllers\PostController@deletePostData');
+	Route::get('get-subcategory-data/{id}', 'App\Http\Controllers\CategoryController@getsubcategorydata');
+
 	//posts ends
 
 });

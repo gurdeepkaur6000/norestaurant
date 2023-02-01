@@ -74,6 +74,16 @@ class CategoryController extends Controller
         return view('backend.sub-categories')->with("subcategoryData",$subcategoryData);
     }
 
+    public function getsubcategorydata($id)
+    {
+    	// Read value from Model method
+        $subcategoryData = Category::getSubCategoryDataByID($id);
+
+        // Pass to view
+        return array('subcategoryData'=>$subcategoryData);
+    }
+    
+
     public function showCreateSubCategory()
     {
         $subcategoryData = Category::getCategoryData();

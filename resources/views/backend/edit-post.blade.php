@@ -22,7 +22,7 @@
                         @method('PUT')
                         <div class="form-group mb-3">
                             <label for="">Select Category</label>
-                            <select type="text" name="category_id" value="" class="form-control" required>
+                            <select name="category_id" value="" class="form-control" required ng-model="category_id" id="categoryid">
                                 <option value="0">Select Category</option>
                                 @foreach($categoryData as $categoriesR)
                                 <option {{ ( $categoriesR->id == $postData->category_id) ? "selected" : "" }} value="{{$categoriesR->id}}">{{$categoriesR->title}}</option>
@@ -31,11 +31,11 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Select Sub-Category</label>
-                            <select type="text" name="sub_category_id" value="" class="form-control">
+                            <select name="sub_category_id" class="form-control" ng-model="sub_category_id">
                                 <option value="0">Select Sub-Category</option>
-                                @foreach($subcategoryData as $categoriesR)
+                                <option ng-repeat="subcategoryDataSelectR in subcategoryDataSelect" value="@{{subcategoryDataSelectR.id}}">@{{subcategoryDataSelectR.title}}</option>
                                 <option {{ ( $categoriesR->id == $postData->sub_category_id) ? "selected" : "" }} value="{{$categoriesR->id}}">{{$categoriesR->title}}</option>
-                                @endforeach
+                                
                             </select>
                         </div>
                         <div class="form-group mb-3">
