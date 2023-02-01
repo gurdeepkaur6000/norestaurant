@@ -26,8 +26,9 @@ class CategoryController extends Controller
     {
     	$categories = new Category;
  
-		$categories->title = $request->input('title');;
-		$categories->description = $request->input('description');;
+		$categories->title = $request->input('title');
+		$categories->description = $request->input('description');
+ 		$categories->parent_id = 0;
  
 		$categories->save();
 

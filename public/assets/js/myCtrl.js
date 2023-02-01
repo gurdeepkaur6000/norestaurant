@@ -1,9 +1,11 @@
 app.controller("myCtrl", function($scope,$http,$window) {
 //start 
+	$url = "http://localhost:8000/";
+	
 	$scope.showTableDataPage =function()
 	{
 		$scope.tnData = {};
-		$http.get("/get-Table-Number").then(function(response) {
+		$http.get($url+"get-Table-Number").then(function(response) {
 			$scope.tnData = response.data;
 		});
 	}
@@ -11,7 +13,7 @@ app.controller("myCtrl", function($scope,$http,$window) {
    	$scope.startTableNumber = function(data)
    	{
    		var order_id = 0;
-   		$window.location.href = '/items/'+data.id+'/'+order_id;
+   		$window.location.href = $url+'items/'+data.id+'/'+order_id;
    	}
 
    	$scope.getTablePostPage =function(tableid,orderid)
@@ -21,7 +23,7 @@ app.controller("myCtrl", function($scope,$http,$window) {
 		var obj = {'tableid':tableid,
 					'orderid':orderid
 				};
-		$http.post("/get-table-post-data",obj).then(function(response) {
+		$http.post($url+"get-table-post-data",obj).then(function(response) {
 			$scope.categoryData = response.data.categoryData;
 			$scope.subcategoryData = response.data.subcategoryData;
 			$scope.onetnData = response.data.onetnData;
