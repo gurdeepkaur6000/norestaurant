@@ -43,15 +43,28 @@ app.controller("myHash", function($scope,$http,$window) {
         
 	}
 
-	$scope.showeditSubCategory=function()
+	$scope.categoryidOnPost=function(category_id,sub_category_id)
 	{
-		$scope.subpostDataSelect = [];
-		var catvalue = document.getElementById('categoryid').value;
-		$scope.catvalue = catvalue;
-		$scope.subcategoryDataSelect = [];
+		$scope.catid = category_id;
+		$scope.subcatid = sub_category_id;
+		setTimeout(function(){
+			$scope.$apply(function () {
+				document.getElementById("categoryid").value = $scope.catid;
+				document.getElementById("sub_category_id").value = $scope.subcatid;
+			});
+		},2000);
+		//$scope.subpostDataSelect = [];
+		//var catvalue = document.getElementById('categoryid').value;
+		//$scope.catvalue = catvalue;
+		//$scope.subcategoryDataSelect = [];
 
 		$scope.tnData = {};
-		$http.get($url+"get-subcategory-data/"+catvalue).then(function(response) {
+		$http.get($url+"get-allcat-data").then(function(response) {
+			$scope.categoryData = response.data.categoryData;
+			$scope.subcategoryData = response.data.subcategoryData;
+		});
+
+		$http.get($url+"get-subcategory-data/"+category_id).then(function(response) {
 			$scope.subcategoryDataSelect = response.data.subcategoryData;
 		});
 

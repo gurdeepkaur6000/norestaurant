@@ -93,6 +93,10 @@ Route::middleware('auth')->group( function () {
 	Route::get('delete-post/{id}', 'App\Http\Controllers\PostController@deletePostData');
 	Route::get('get-subcategory-data/{id}', 'App\Http\Controllers\CategoryController@getsubcategorydata');
 
+	Route::get('get-allcat-data', 'App\Http\Controllers\PostController@getallcatdata');
+
+	
+
 	//posts ends
 
 });

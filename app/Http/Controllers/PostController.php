@@ -28,6 +28,15 @@ class PostController extends Controller
         return view('backend.add-post')->with("categoryData",$categoryData)->with("subcategoryData",$subcategoryData);
     }
 
+    public function getallcatdata()
+    {
+    	$categoryData = Category::getCategoryData();
+        $subcategoryData = Category::getSubCategoryData();
+        
+        return array('categoryData'=>$categoryData,
+        	'subcategoryData'=>$subcategoryData);
+    }
+
     public function createPostData(Request $request)
     {
     	$posts = new Posts;

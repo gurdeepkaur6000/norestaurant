@@ -1,7 +1,7 @@
 @extends('backend/layout')
   
 @section('content')
-<div class="container">
+<div class="container" ng-app="myApp" ng-controller="myHash" ng-init="categoryidOnPost(<?php echo $postData->category_id; ?>,<?php echo $postData->sub_category_id; ?>);">
     <div class="row">
         <div class="col-md-12">
 
@@ -22,19 +22,17 @@
                         @method('PUT')
                         <div class="form-group mb-3">
                             <label for="">Select Category</label>
-                            <select name="category_id" value="" class="form-control" required ng-model="category_id" id="categoryid">
-                                <option value="0">Select Category</option>
-                                @foreach($categoryData as $categoriesR)
-                                <option {{ ( $categoriesR->id == $postData->category_id) ? "selected" : "" }} value="{{$categoriesR->id}}">{{$categoriesR->title}}</option>
-                                @endforeach
+                            <select name="category_id" class="form-control" required ng-model="category_id" id="categoryid" ng-change="showSubCategory();">
+                                <option ng-repeat="categoryDataR in categoryData" value="@{{categoryDataR.id}}">@{{categoryDataR.title}}</option>
+                                
+                                
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Select Sub-Category</label>
-                            <select name="sub_category_id" class="form-control" ng-model="sub_category_id">
+                            <select name="sub_category_id" class="form-control" ng-model="sub_category_id" id="sub_category_id">
                                 <option value="0">Select Sub-Category</option>
-                                <option ng-repeat="subcategoryDataSelectR in subcategoryDataSelect" value="@{{subcategoryDataSelectR.id}}">@{{subcategoryDataSelectR.title}}</option>
-                                <option {{ ( $categoriesR->id == $postData->sub_category_id) ? "selected" : "" }} value="{{$categoriesR->id}}">{{$categoriesR->title}}</option>
+                                <option ng-repeat="subcategoryDataR in subcategoryDataSelect" value="@{{subcategoryDataR.id}}">@{{subcategoryDataR.title}}</option>
                                 
                             </select>
                         </div>
